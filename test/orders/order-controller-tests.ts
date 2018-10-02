@@ -1,7 +1,7 @@
 /* @abdul : 28-09-2018 */
 import * as chai from "chai";
-import OrderController from "../../src/api/orders/order-controller";
-import { IOrder } from "../../src/api/orders/order";
+import ProposalController from "../../src/api/proposals/proposal-controller";
+import { IProposal } from "../../src/api/proposals/proposal";
 import { IUser } from "../../src/api/users/user";
 import * as Configs from "../../src/configurations";
 import * as Server from "../../src/server";
@@ -13,7 +13,7 @@ const database = Database.init(configDb);
 const assert = chai.assert;
 const serverConfig = Configs.getServerConfigs();
 
-describe("OrderController Tests", () => {
+describe("ProposalController Tests", () => {
   let server;
 
   before(done => {
@@ -25,7 +25,7 @@ describe("OrderController Tests", () => {
 
   beforeEach(done => {
     Utils.createSeedUserData(database, done);
-    Utils.createSeedOrderData(database, done);
+    Utils.createSeedProposalData(database, done);
   });
 
   afterEach(done => {
@@ -33,7 +33,7 @@ describe("OrderController Tests", () => {
   });
   
   
-   it("Create Store Order for customer with discount $5 for every $100, discount is $45 of 990", async () => {
+   it("Create Store Proposal for customer with discount $5 for every $100, discount is $45 of 990", async () => {
        
     var user = Utils.createUserDummy();
 
@@ -42,7 +42,7 @@ describe("OrderController Tests", () => {
     var login: any = JSON.parse(loginResponse.payload);
    
     
-    var order = {
+    var proposal = {
         "product": "Shoes",
         "amount": 990,
         "description": "Shoes sports"
@@ -50,8 +50,8 @@ describe("OrderController Tests", () => {
 
     const res = await server.inject({
       method: "POST",
-      url: serverConfig.routePrefix + "/orders",
-      payload: order,
+      url: serverConfig.routePrefix + "/proposals",
+      payload: proposal,
       headers: { authorization: login.token }
     });
 

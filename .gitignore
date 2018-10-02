@@ -37,3 +37,6 @@ build
 #Ignore typings
 typings
 
+#Ignore bk folder
+build
+

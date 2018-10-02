@@ -3,12 +3,14 @@ import * as Mongoose from "mongoose";
 import { IDataConfiguration } from "./configurations";
 import { ILogging, LoggingModel } from "./plugins/logging/logging";
 import { IUser, UserModel } from "./api/users/user";
-import { IOrder, OrderModel } from "./api/orders/order";
+import { IProposal, ProposalModel } from "./api/proposals/proposal";
+import { IProposalBank, ProposalBankModel } from "./api/proposals/proposal-bank";
 
 export interface IDatabase {
   loggingModel: Mongoose.Model<ILogging>;
   userModel: Mongoose.Model<IUser>;
-  orderModel: Mongoose.Model<IOrder>;
+  proposalModel: Mongoose.Model<IProposal>;
+  proposalBankModel: Mongoose.Model<IProposalBank>;
 }
 
 export function init(config: IDataConfiguration): IDatabase {
@@ -27,7 +29,8 @@ export function init(config: IDataConfiguration): IDatabase {
 
   return {
     loggingModel: LoggingModel,
-    orderModel: OrderModel,
-    userModel: UserModel
+    proposalModel: ProposalModel,
+    userModel: UserModel,
+    proposalBankModel: ProposalBankModel
   };
 }

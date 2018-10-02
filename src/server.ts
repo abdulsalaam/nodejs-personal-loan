@@ -3,9 +3,10 @@ import * as Boom from "boom";
 import { IPlugin } from "./plugins/interfaces";
 import { IServerConfigurations } from "./configurations";
 import * as Logs from "./plugins/logging";
-import * as Orders from "./api/orders";
+import * as Proposals from "./api/proposals";
 import * as Users from "./api/users";
 import { IDatabase } from "./database";
+
 
 export async function init(
   configs: IServerConfigurations,
@@ -51,7 +52,7 @@ export async function init(
 
     console.log("Register Routes");
     Logs.init(server, configs, database);
-    Orders.init(server, configs, database);
+    Proposals.init(server, configs, database);
     Users.init(server, configs, database);
     console.log("Routes registered sucessfully.");
 

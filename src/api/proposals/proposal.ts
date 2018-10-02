@@ -1,7 +1,7 @@
 /* @abdul : 28-09-2018 */
 import * as Mongoose from "mongoose";
 
-export interface IOrder extends Mongoose.Document {
+export interface IProposal extends Mongoose.Document {
   userId: string;
   product: string;
   amount:number;
@@ -13,7 +13,7 @@ export interface IOrder extends Mongoose.Document {
   updateAt: Date;
 }
 
-export const OrderSchema = new Mongoose.Schema(
+export const ProposalSchema = new Mongoose.Schema(
   {
     userId: { type: String, required: true },
     product: { type: String, required: true },
@@ -28,4 +28,4 @@ export const OrderSchema = new Mongoose.Schema(
   }
 );
 
-export const OrderModel = Mongoose.model<IOrder>("Order", OrderSchema);
+export const ProposalModel = Mongoose.model<IProposal>("Proposal", ProposalSchema);

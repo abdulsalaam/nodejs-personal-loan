@@ -11,14 +11,14 @@ const register = async (server: Hapi.Server): Promise<void> => {
         plugin: require("hapi-swagger"),
         options: {
           info: {
-            title: "Order Api",
-            description: "Order Api Documentation",
+            title: "Loan Proposal Api",
+            description: "Loan Proposal Api Documentation",
             version: "1.0"
           },
           tags: [
             {
-              name: "orders",
-              description: "Api orders interface."
+              name: "proposals",
+              description: "Api proposals interface."
             },
             {
               name: "users",

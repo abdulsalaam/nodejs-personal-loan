@@ -41,6 +41,7 @@ export default class UserController {
 
   public async createUser(request: IRequest, h: Hapi.ResponseToolkit) {
     try {
+      console.log('paload:', request.payload);
       let user: any = await this.database.userModel.create(request.payload);
       return h.response({ token: this.generateToken(user) }).code(201);
     } catch (error) {

@@ -1,17 +1,17 @@
 import * as Database from "../src/database";
 
-export function createOrderDummy(userId?: string, product?: string, amount? : number, description?: string) {
-  var order = {
-    product: product || "dummy order",
+export function createProposalDummy(userId?: string, product?: string, amount? : number, description?: string) {
+  var proposal = {
+    product: product || "dummy proposal",
     amount : amount || 0,
-    description: description || "I'm a dummy order!"
+    description: description || "I'm a dummy proposal!"
   };
 
   if (userId) {
-    order["userId"] = userId;
+    proposal["userId"] = userId;
   }
 
-  return order;
+  return proposal;
 }
 
 export function createUserDummy(email?: string) {
@@ -27,9 +27,9 @@ export function createUserDummy(email?: string) {
 
 export function clearDatabase(database: Database.IDatabase, done: MochaDone) {
   var promiseUser = database.userModel.remove({});
-  var promiseOrder = database.orderModel.remove({});
+  var promiseProposal = database.proposalModel.remove({});
 
-  Promise.all([promiseUser, promiseOrder])
+  Promise.all([promiseUser, promiseProposal])
     .then(() => {
       done();
     })
@@ -38,23 +38,23 @@ export function clearDatabase(database: Database.IDatabase, done: MochaDone) {
     });
 }
 
-export function createSeedOrderData(database: Database.IDatabase, done: MochaDone) {
+export function createSeedProposalData(database: Database.IDatabase, done: MochaDone) {
   return database.userModel
     .create(createUserDummy())
     .then(user => {
       return Promise.all([
-        database.orderModel.create(
-          createOrderDummy(user._id, "Order 1", 990, "Some dummy data 1")
+        database.proposalModel.create(
+          createProposalDummy(user._id, "Proposal 1", 990, "Some dummy data 1")
         ),
-        database.orderModel.create(
-          createOrderDummy(user._id, "Order 2", 990, "Some dummy data 2")
+        database.proposalModel.create(
+          createProposalDummy(user._id, "Proposal 2", 990, "Some dummy data 2")
         ),
-        database.orderModel.create(
-          createOrderDummy(user._id, "Order 3", 990,"Some dummy data 3")
+        database.proposalModel.create(
+          createProposalDummy(user._id, "Proposal 3", 990,"Some dummy data 3")
         )
       ]);
     })
-    .then(order => {
+    .then(proposal => {
       done();
     })
     .catch(error => {
