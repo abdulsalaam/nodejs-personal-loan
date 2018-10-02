@@ -1,12 +1,16 @@
 version: '2'
 services:
   app:
-    build: .
+    depends_on:
+      - mongodb
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
-      - PORT=8080
-      - MONGO_URL=mongodb:27017
+      - PORT=9090
+      - MONGO_URL=mongodb://mongodb:27017/storedb-dev
     ports: 
-      - "8080:8080"
+      - "9090:9090"
     links:
       - mongodb
   mongodb:

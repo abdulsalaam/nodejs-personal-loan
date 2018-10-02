@@ -17,7 +17,7 @@ export async function init(
     const server = new Hapi.Server({
       debug: { request: ['error'] },
       port: port,
-      host:"localhost",
+      host:"0.0.0.0",
       routes: {
         cors: {
           origin: ["*"]

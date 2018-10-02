@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:6.9.1
+FROM node:8-alpine
 
 MAINTAINER Talento90
 
@@ -21,7 +21,8 @@ RUN npm prune --production
 # run the container using a specific user
 USER user-app
 
-EXPOSE 8080
+ENV SERVER_PORT 9090 
+EXPOSE 9090
 
 # run application
 CMD ["npm", "start"]
