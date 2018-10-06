@@ -109,6 +109,8 @@ export default class ProposalController {
 	//let userId = request.auth.credentials.id;
 	let top = request.query["top"];
 	let skip = request.query["skip"];
+    let loanAmount = request.query["loanAmount"];
+    let tenure = request.query["tenure"];
 	let proposals = await this.database.proposalBankModel
 	  //.find({ userId: userId })
       .find({})
@@ -116,6 +118,27 @@ export default class ProposalController {
 	  .skip(skip)
 	  .limit(top);
 
+   let finalProposals = [];
+   for (var i = 0; i < proposals.length; i++) {
+        //console.log(proposals[i]);
+        let principal_installment = loanAmount / (tenure * 12);
+        let yearly_interest = (loanAmount * proposals[i].minIrate) / 100;
+        let monthly_interest = yearly_interest / 12;
+        let monthly_repayment = monthly_interest + principal_installment;
+
+        let total_interest_payable = yearly_interest * tenure;
+        let total_amount_payable = loanAmount + ( yearly_interest * tenure );
+        let total_tenure_months = tenure * 12;
+
+        proposals[i]['loanBreakup'] = {
+            'summary' : 'RM ' + loanAmount + ' for ' + tenure + ' years with interest rate of ' + proposals[i].minIrate + '% per annum',
+            'monthly_repayment' : monthly_interest,
+            'total_interest_payable' : total_interest_payable,
+            'total_amount_payable' : total_amount_payable,
+            'total_tenure_months' : total_tenure_months
+            };
+
+    }
 	return proposals;
   }
 

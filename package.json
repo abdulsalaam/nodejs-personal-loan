@@ -1,10 +1,10 @@
 {
-  "name": "nodejs-personal-loan-demo",
+  "name": "nodejs-store-discount-demo",
   "version": "1.0.1",
   "description": "",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/abdulsalaam/nodejs-personal-loan.git"
+    "url": "https://github.com/abdulsalaam/nodejs-store-discount-demo.git"
   },
   "author": "Abdul Salam",
   "keywords": [
@@ -42,8 +42,7 @@
     "nodemon": "1.17.3",
     "path": "0.12.7",
     "rotating-file-stream": "1.3.6",
-    "vision": "5.3.2",
-    "node-fetch": "^2.2.0"
+    "vision": "5.3.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.1",
@@ -58,7 +57,7 @@
     "@types/node": "9.4.7",
     "@types/sinon": "^4.1.3",
     "chai": "^4.1.2",
-    "gulp": "^3.9.1",
+    "gulp": "3.9.1",
     "gulp-env": "0.4.0",
     "gulp-mocha": "5.0.0",
     "gulp-rimraf": "0.2.2",
@@ -66,6 +65,7 @@
     "gulp-tslint": "8.1.3",
     "mocha": "^5.0.0",
     "node": "9.8.0",
+    "node-fetch": "^2.2.0",
     "sinon": "4.4.6",
     "tslint": "5.9.1",
     "typescript": "^2.7.2"

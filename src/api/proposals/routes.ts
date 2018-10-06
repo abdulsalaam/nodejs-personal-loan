@@ -78,7 +78,9 @@ export default function (
       validate: {
         query: {
           top: Joi.number().default(5),
-          skip: Joi.number().default(0)
+          skip: Joi.number().default(0),
+          loanAmount: Joi.number().default(0),
+          tenure: Joi.number().default(0)
         }
       }
     }

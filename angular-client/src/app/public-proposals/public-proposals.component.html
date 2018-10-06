@@ -1,0 +1,73 @@
+<div class="col-sm-12" *ngFor="let proposal of publicProposals; let i = index">
+<div class="table__product table__product--promo">
+    <div class="col-promo"><span>{{proposal?.metatags?.title?.value}}</span></div>
+    <div class="table-columns">
+        <div class="col-product"><img src="https://www.imoney.my{{proposal?.bankLogo}}" class="col-product-image">
+            <div class="col-product-info">
+                <h3><div data-imu-track="a"><a href="/personal-loan/alliance-bank/cashfirst-personal-loan" data-subject="User" data-action="Click" data-description="Product Title" data-region="Listing Content Main" data-vertical="Personal Loan"><span>{{proposal?.title}}</span></a></div></h3>
+                <p>{{proposal?.featured_highlights[0]?.value}}</p>
+                <div>
+        <i class="fa" [ngClass]="toggle[i] ? 'glyphicon glyphicon-minus': 'glyphicon glyphicon-plus'" aria-hidden="true"></i><a data-toggle="collapse" [attr.data-parent]="'#accordion_' + i" [attr.href]="'#collapseOne_' + i" (click)="toggle[i] = !toggle[i]"> More Info</a></div>
+        </div>
+        </div>
+        <div class="col-rate col-sm-18p col-xxs-50p"><span class="col-rate--title col-title--small">Interest rate</span>
+            <div class="col-rate--item font-xlg"><span *ngIf="proposal.minIrate">{{proposal?.minIrate}} %</span><h6  *ngIf="!proposal.minIrate" >Ask Bank</h6></div>
+        </div>
+        <div class="col-rate col-sm-18p col-xxs-50p"><span class="col-rate--title col-title--small">Monthly repayment</span>
+            <div class="col-rate--item font-xlg"><span>RM {{proposal?.loanBreakup?.monthly_repayment | number : '1.2'}}</span></div><span class="product-repayment-period extra-info">{{proposal?.loanBreakup?.total_tenure_months}} months</span>
+        </div>
+        <div class="col-apply col-sm-28p pull-right"><a class="btn btn-success btn-apply" >Apply Now</a></div>
+    </div>
+    <div class="col-more-info" style="display: none;background-color:#FFF8BC;padding:0 5px 0 10px;" [attr.id]="'collapseOne_' + i" class="panel-collapse collapse in">
+        <div class="info-summary" style="background-color:grey;display:block;height:60px">
+         <ul>
+            <li class="col-xxs-100 col-xs-50p"><strong>Summary</strong> : {{proposal?.loanBreakup?.summary}}</li>
+            <li class="col-xxs-33p col-xs-14p"><strong>Monthly repayment </strong> : {{proposal?.loanBreakup?.monthly_repayment | number : '1.2'}}</li>
+            <li class="col-xxs-33p col-xs-18p"><strong>Total interest payable </strong>:{{proposal?.loanBreakup?.total_interest_payable}}</li>
+            <li class="col-xxs-33p col-xs-18p"><strong>Total amount payable </strong> RM {{proposal?.loanBreakup?.total_amount_payable}} </li>
+        </ul>
+        
+        
+        </div>
+        <div class="info-features">
+            <div class="features-key col-xs-50p">
+                <h5><span>Product features</span></h5>
+                <ul>
+                    <li><strong>Financing amount (min to max) </strong> <span>RM {{proposal?.minimumAmount}} - RM {{proposal?.maximumAmount}}</span></li>
+                    <li><strong>Loan tenure (min to max) </strong> <span>{{proposal?.minimumTenure}} - {{proposal?.maximumTenure}} years</span></li>
+                    <li><strong>Interest rate Fixed rate of </strong> <span>{{proposal?.minIrate}}% - {{proposal?.maxIrate}}% per annum</span></li>
+                    <li><strong>Approval duration </strong><span>Up to 48 hours</span></li>
+                </ul>
+            </div>
+            <div class="features-eligibility col-xs-50p">
+                <h5><span>Eligibility</span></h5>
+                <ul>
+                    <li><strong>Min. salary requirement </strong><span>RM {{proposal?.minimumIncome}} gross per month</span></li>
+                    <li><strong>Employment eligibility </strong><span [innerHTML]="proposal?.employmentEligibility"></span></li>
+                    <li><strong>Age requirement (min-max) </strong><span>{{proposal?.minimumAge}} - {{proposal?.maximumAge}} years old</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="info-actions" data-imu-track="a" class="btn btn-success btn-apply"><a href="#"> Apply Now</a></div>
+    </div>
+</div>
+
+</div>
+
+
+<div class="col-sm-12" *ngIf="!authService.isLoggedIn">
+  <div class="jumbotron text-center">
+    <h2>Get More Proposals By Logging In</h2>
+  </div>
+</div>
+
+<div class="col-sm-12" *ngIf="authService.isLoggedIn">
+  <div class="jumbotron text-center">
+    <h2>View Private Proposals</h2>
+    <a class="btn btn-lg btn-success" routerLink="/special">Private Proposals</a>
+  </div>
+</div>
+
+<div class="col-sm-12 alert alert-danger" *ngIf="error">
+  <strong>Oops!</strong> An error occurred fetching data. Please try again.
+</div>
