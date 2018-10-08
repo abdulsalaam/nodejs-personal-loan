@@ -1,9 +1,12 @@
-FROM node:8-alpine
+FROM node:8
 
-MAINTAINER Talento90
+MAINTAINER Abdulsalam
 
 # create a specific user to run this container
-RUN adduser -S -D user-app
+#RUN adduser -S -D user-app 
+
+RUN ln -sf /bin/bash /bin/sh
+RUN useradd -ms /bin/bash user-app
 
 # add files to container
 ADD . /app

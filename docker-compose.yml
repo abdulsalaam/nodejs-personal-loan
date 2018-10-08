@@ -1,5 +1,23 @@
 version: '2'
 services:
+
+  angular: # name of the first service
+    build: angular-client # specify the directory of the Dockerfile
+    ports:
+      - "4200:4200" # specify port forewarding
+  # Build the container using the nginx Dockerfile
+  nginx:
+    build: ./nginx
+    # Map Nginx port 80 to the local machine's port 80
+    ports:
+      - "8080:80"
+    # Link the angular container so that Nginx will have access to it
+    environment:
+       NGINX_BACKEND_ENDPOINT: "app:9090"
+       NGINX_THROTTLE_RATE_LIMIT: "100r/m"
+       NGINX_SET_NODELAY: "true"
+    links:
+      - angular    
   app:
     depends_on:
       - mongodb

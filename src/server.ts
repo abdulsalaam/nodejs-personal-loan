@@ -20,7 +20,10 @@ export async function init(
       host:"0.0.0.0",
       routes: {
         cors: {
-          origin: ["*"]
+          origin: ["*"],
+          headers : ["Accept", "Content-Type"],
+          additionalHeaders : ["X-Requested-With"]
+
         }
       }
     });

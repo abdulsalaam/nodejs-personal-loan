@@ -19,7 +19,7 @@ export class ProposalService {
     private authService: AuthService
   ) { 
    
-   this.publicProposalsUrl = this.baseUrl+'/proposals?top=5&skip=0';
+   this.publicProposalsUrl = this.baseUrl+'proposals?top=5&skip=0';
   
   }
 

@@ -132,7 +132,7 @@ export default class ProposalController {
 
         proposals[i]['loanBreakup'] = {
             'summary' : 'RM ' + loanAmount + ' for ' + tenure + ' years with interest rate of ' + proposals[i].minIrate + '% per annum',
-            'monthly_repayment' : monthly_interest,
+            'monthly_repayment' : monthly_repayment,
             'total_interest_payable' : total_interest_payable,
             'total_amount_payable' : total_amount_payable,
             'total_tenure_months' : total_tenure_months
