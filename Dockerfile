@@ -19,6 +19,7 @@ RUN chmod -R 777 .
 # build process
 RUN npm install
 RUN npm run build
+RUN npm run test
 RUN npm prune --production
 
 # run the container using a specific user

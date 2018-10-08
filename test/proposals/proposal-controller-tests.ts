@@ -32,33 +32,25 @@ describe("ProposalController Tests", () => {
     Utils.clearDatabase(database, done);
   });
   
-  
-   it("Create Store Proposal for customer with discount $5 for every $100, discount is $45 of 990", async () => {
-       
+  it("Get bank loan proposal", async () => {
     var user = Utils.createUserDummy();
 
     const loginResponse = await Utils.login(server, serverConfig, user);
     assert.equal(200, loginResponse.statusCode);
     var login: any = JSON.parse(loginResponse.payload);
-   
-    
-    var proposal = {
-        "product": "Shoes",
-        "amount": 990,
-        "description": "Shoes sports"
-    };
 
     const res = await server.inject({
-      method: "POST",
-      url: serverConfig.routePrefix + "/proposals",
-      payload: proposal,
-      headers: { authorization: login.token }
+      method: "GET",
+      url: serverConfig.routePrefix + "/proposals?top=5&skip=0&loanAmount=0&tenure=0",
+      //headers: { authorization: login.token }
     });
 
     var responseBody: any = JSON.parse(res.payload);
     //console.log(responseBody);
-    assert.equal(201, res.statusCode);
-    assert.equal(45, responseBody.discount);
+    assert.equal(200, res.statusCode);
+    assert.notEqual(res, null);
+    //assert.equal(45, responseBody.discount);
+    
   });
   
   
