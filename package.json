@@ -1,10 +1,10 @@
 {
-  "name": "nodejs-store-discount-demo",
+  "name": "nodejs-personal-loan",
   "version": "1.0.1",
   "description": "",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/abdulsalaam/nodejs-store-discount-demo.git"
+    "url": "https://github.com/abdulsalaam/nodejs-personal-loan.git"
   },
   "author": "Abdul Salam",
   "keywords": [

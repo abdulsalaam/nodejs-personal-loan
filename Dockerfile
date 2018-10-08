@@ -17,9 +17,9 @@ WORKDIR app
 RUN chmod -R 777 .
 
 # build process
-RUN npm install
+RUN npm install 
 RUN npm run build
-RUN npm run test
+
 RUN npm prune --production
 
 # run the container using a specific user
@@ -29,4 +29,5 @@ ENV SERVER_PORT 9090
 EXPOSE 9090
 
 # run application
-CMD ["npm", "start"]
+CMD ["npm", "test"]
+#CMD ["npm", "start"]

@@ -77,7 +77,7 @@ export default function (
       description: "Get all proposals.",
       validate: {
         query: {
-          top: Joi.number().default(5),
+          top: Joi.number().default(10),
           skip: Joi.number().default(0),
           loanAmount: Joi.number().default(0),
           tenure: Joi.number().default(0)

@@ -15,38 +15,19 @@ import * as Helper from "../../utils/helper";
 export default class ProposalController {
   private database: IDatabase;
   private configs: IServerConfigurations;
-  private EMPLOYEE_DISCOUNT = 30;
-  private AFFILIATE_DISCOUNT = 10;
-  private CUSTOMER__2YEAR_DISCOUNT = 5;
-  private EXTRA_DISCOUNT = 5;
+
 
   constructor(configs: IServerConfigurations, database: IDatabase) {
 	this.configs = configs;
 	this.database = database;
   }
 
-  private generateDiscount(user: IUser, amount: number) {
-	let years = moment().diff(user.createdAt, 'years', false);
-	let discount = 0;
-    if (user.userType === 'employee') {
-    discount = (this.EMPLOYEE_DISCOUNT / 100 * amount);
-    } else if (user.userType === 'affiliate') {
-    discount = (this.AFFILIATE_DISCOUNT / 100 * amount);
-    } else if (user.userType === 'customer' && years >= 2) {
-    discount = (this.AFFILIATE_DISCOUNT / 100 * amount);
-    }
-	let extraDiscount = Math.trunc(amount / 100) * 5 ;
-	return (discount + extraDiscount);
-  }
 
   public async createProposal(request: IRequest, h: Hapi.ResponseToolkit) {
 	var newProposal: IProposal = <IProposal>request.payload;
 	newProposal.userId = request.auth.credentials.id;
 	try {
 	  const id = request.auth.credentials.id;
-	  let user: IUser = await this.database.userModel.findById(id);
-	  newProposal.discount = await this.generateDiscount(user, newProposal.amount);
-	  newProposal.netAmount = newProposal.amount - newProposal.discount;
 	  let proposal: IProposal = await this.database.proposalModel.create(newProposal);
 	  return h.response(proposal).code(201);
 	} catch (error) {
